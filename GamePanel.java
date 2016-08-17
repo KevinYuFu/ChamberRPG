@@ -23,6 +23,7 @@ public class GamePanel extends JPanel implements Observer {
 		this.height = height;
 		this.m = model;
 
+		this.setFocusable(true);
 
 		// // This is code from other project. Add in if I want
 		// this.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -62,6 +63,7 @@ public class GamePanel extends JPanel implements Observer {
 
 		drawBackground(g2);
 		m.getMap().drawWalkable(g2);
+		m.getPlayer().drawUnit(g2);
 	}
 
 	// Observer Interface
