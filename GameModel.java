@@ -13,25 +13,34 @@ public class GameModel extends Observable {
 	public GameMap getMap(){ return this.map; }
 	public PlayerUnit getPlayer() { return this.player; }
 
-	public void setPlayerDir(char keyCode) {
-		switch( keyCode ) {
-			case 'w': // up
-				player.setDirUp();
+	public void setPlayerDir(int direction) {	//(char keyCode) {
+		switch ( direction ) {
+			case 0: //
+				player.setDirN();
 				break;
-			case 's': // down
-				player.setDirDown();
+			case 1: //
+				player.setDirNE();
 				break;
-			case 'a': // left
-				player.setDirLeft();
+			case 2: //
+				player.setDirE();
 				break;
-			case 'd': // right
-				player.setDirRight();
+			case 3: //
+				player.setDirSE();
 				break;
-			case 'v': // right
-				player.setDirVerticalNull();
+			case 4: //
+				player.setDirS();
 				break;
-			case 'h': // right
-				player.setDirHorizontalNull();
+			case 5: //
+				player.setDirSW();
+				break;
+			case 6: //
+				player.setDirW();
+				break;
+			case 7: //
+				player.setDirNW();
+				break;
+			case 8: //
+				player.setDirNull();
 				break;
 		}
 	}

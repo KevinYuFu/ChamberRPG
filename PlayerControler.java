@@ -37,13 +37,21 @@ public class PlayerControler implements KeyListener {
 	}
 
 	private void updatePlayer(){
-		if (up == down) { model.setPlayerDir('v'); }
-		else if (up) {model.setPlayerDir('w'); }
-		else if (down) {model.setPlayerDir('s'); }
-
-		if (left == right) { model.setPlayerDir('h'); }
-		else if (left) { model.setPlayerDir('a'); }
-		else if (right) { model.setPlayerDir('d'); }
+		int c = 8;
+		if (up == down) { 
+			if (left == right) { c = 8; }
+			else if (left) { c = 6; }
+			else { c = 2; }
+		} else if (up) {
+			if (left == right) { c = 0; }
+			else if (left) { c = 7; }
+			else { c = 1; }
+		} else {
+			if (left == right) { c = 4; }
+			else if (left) { c = 5; }
+			else { c = 3; }
+		}
+		model.setPlayerDir(c);
 	}
 	
 }
