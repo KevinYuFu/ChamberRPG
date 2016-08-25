@@ -10,19 +10,21 @@ public class Region {
 		this.p2 = new Point(Math.max(x1, x2), Math.max(y1, y2));
 	}
 
-	/* Not sure if need this
-	public int getX1() { return this.p1.getX(); }
-	public int getX2() { return this.p2.getX(); }
-	public int getY1() { return this.p1.getY(); }
-	public int getY2() { return this.p2.getY(); }
-	*/
-
-	// checks is points are within region.
-	// // Should add radius checking
-	public boolean inRegion(int x, int y){
+	// checks is points are within region x bound.
+	public int inRegionXBound(int x, int rad){
 		// check if x and y are within points 1 and 2
-		return ((x > p1.getX()) && (y > p1.getY()) &&
-			(x < p2.getX()) && (y < p2.getY()));
+		if (x - rad < p1.getX()) { return p1.getX() + rad; }
+		if (x + rad > p2.getX()) { return p2.getX() - rad; }
+		return -1;
+	}
+
+	// checks is points are within region y bound.
+	public int inRegionYBound(int y, int rad){
+		// check if x and y are within points 1 and 2
+		if (y - rad < p1.getY()) { return p1.getY() + rad; }
+		if (y + rad > p2.getY()) { return p2.getY() - rad; }
+		return -1;
+		//return ((y - rad > p1.getY()) && (y + rad < p2.getY()) );
 	}
 
 	// Draw

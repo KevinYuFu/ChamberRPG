@@ -13,16 +13,26 @@ public class GameMap{
 	// return walkable Regions
 	public ArrayList<Region> getWalkableRegions() { return walkableRegions; }
 
-	// Checks co-ordinates for given points.
-	// returns true if points are valid
-	// // Probably want to add a radius check or something mroe than a point
-	public boolean inBound(int x, int y){
+	// Checks is x co-ordinate is in x bound
+	// returns int of bound if points are valid
+	public int inXBound(int x, int rad){
 		for (int i = 0; i < walkableRegions.size(); ++i){
-			if (!walkableRegions.get(i).inRegion(x, y)){
-				return false;
+			if (walkableRegions.get(i).inRegionXBound(x, 0) == -1){
+				return walkableRegions.get(i).inRegionXBound(x, rad);
 			}
 		}
-		return true;
+		return -2;
+	}
+
+	// Checks is x co-ordinate is in x bound
+	// returns int of bound if points are valid
+	public int inYBound(int y, int rad){
+		for (int i = 0; i < walkableRegions.size(); ++i){
+			if (walkableRegions.get(i).inRegionYBound(y, 0) == -1){
+				return walkableRegions.get(i).inRegionYBound(y, rad);
+			}
+		}
+		return -2;
 	}
 
 	public void drawWalkable(Graphics2D g2) {

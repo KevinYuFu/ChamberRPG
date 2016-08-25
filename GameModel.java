@@ -7,11 +7,15 @@ public class GameModel extends Observable {
 
 	public GameModel(){
 		this.map = new GameMap();
-		this.player = new PlayerUnit();
+		this.player = new PlayerUnit(this.map);
 	}
 
 	public GameMap getMap(){ return this.map; }
 	public PlayerUnit getPlayer() { return this.player; }
+
+	public void setCursorCoordinate(int x, int y){
+		this.player.setCursorCoordinate(x, y);
+	}
 
 	public void setPlayerDir(int direction) {	//(char keyCode) {
 		switch ( direction ) {

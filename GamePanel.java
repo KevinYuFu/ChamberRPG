@@ -7,21 +7,18 @@ import java.util.Observable;
 import java.util.ArrayList;
 import java.lang.Math.*;
 
-//import java.awt.event.KeyEvent;
-//import java.awt.event.KeyListener;
-
 
 public class GamePanel extends JPanel implements Observer {
 	int width;
 	int height;
-	GameModel m;
+	GameModel model;
 
 	public GamePanel(int width, int height, GameModel model){
 		super();
 		setBackground(Color.BLACK);
 		this.width = width;
 		this.height = height;
-		this.m = model;
+		this.model = model;
 
 		this.setFocusable(true);
 
@@ -38,6 +35,13 @@ public class GamePanel extends JPanel implements Observer {
 			@Override
 			public void mouseReleased(MouseEvent e){
 				// Do Something
+			}
+		});
+
+		addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseMoved(MouseEvent e){
+				// Do Something
+				model.setCursorCoordinate(e.getX(), e.getY());
 			}
 		});
 	}
@@ -62,8 +66,8 @@ public class GamePanel extends JPanel implements Observer {
 		Graphics2D g2 = (Graphics2D)g;
 
 		drawBackground(g2);
-		m.getMap().drawWalkable(g2);
-		m.getPlayer().drawUnit(g2);
+		model.getMap().drawWalkable(g2);
+		model.getPlayer().drawUnit(g2);
 	}
 
 	// Observer Interface

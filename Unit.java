@@ -3,15 +3,21 @@ import java.util.ArrayList;
 import java.lang.Math.*;
 
 public class Unit {
+	// Unit Properties
 	double x;		// x position
 	double y;		// y position
 	double radius;	// radius of unit
 	double speed;	// speed of unit
-	double diagSp;	// speed when going at 45%
+	double diagSp;	// speed when going at an angle (45%)
 	double dx;		// change in x on next step
 	double dy;		// change in y on next step
 
-	public Unit(double x, double y, double r, double s) {
+	// Unit Abilities
+	UnitAbility testAbility;
+
+	GameMap map;	// the current map tha player is on
+
+	public Unit(double x, double y, double r, double s, GameMap m) {
 		this.x = x;
 		this.y = y;
 		this.radius = r;
@@ -19,6 +25,16 @@ public class Unit {
 		this.diagSp = speed *  Math.sqrt(0.5);
 		this.dx = 0;
 		this.dy = 0;
+
+		this.map = m;
+	}
+
+	public double getXCoord() {
+		return this.x;
+	}
+
+	public double getYCoord() {
+		return this.y;
 	}
 
 	public void setDirN(){ 
@@ -60,11 +76,23 @@ public class Unit {
 
 
 	public void move(){
-		x += dx;
-		y += dy;
-		// For testing location of Unit
-		//System.out.println("X: " + x);
-		//System.out.println("Y: " + y);
+		int xResponse = map.inXBound((int)Math.round(x + dx), (int)Math.round(radius));
+		if (xResponse >= 0) {
+			x = xResponse;
+		} else if (xResponse == -2) {
+			System.out.println ("There seems to be an error");
+		} else {
+			x += dx;
+		}
+		
+		int yResponse = map.inYBound((int)Math.round(y + dy), (int)Math.round(radius));
+		if (yResponse >= 0) {
+			y = yResponse;
+		} else if (yResponse == -2) {
+			System.out.println ("There seems to be an error");
+		} else {
+			y += dy;
+		}
 	}
 
 	public void drawUnit(Graphics2D g2) {
@@ -76,7 +104,7 @@ public class Unit {
 		g2.setStroke(new BasicStroke(3));
 
 		Color oldColor = g2.getColor();
-		g2.setColor(Color.BLACK);
+		g2.setColor(Color.BLACK); 
 		g2.fillOval(px, py, diameter, diameter);
 
 		g2.setColor(oldColor);
