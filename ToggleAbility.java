@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class ToggleAbility extends UnitAbility{
+public class ToggleAbility extends UnitAbility{
 	boolean simulCast = false;
 	boolean active = false;
 
@@ -11,5 +11,9 @@ public abstract class ToggleAbility extends UnitAbility{
 
 	public void toggleActive(){
 		active = !active;
+	}
+
+	public void drawAbility(Graphics2D g2){
+
 	}
 }

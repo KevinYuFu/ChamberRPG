@@ -13,7 +13,7 @@ public class Unit {
 	double dy;		// change in y on next step
 
 	// Unit Abilities
-	UnitAbility testAbility;
+	AbilityKit abilityKit;
 
 	GameMap map;	// the current map tha player is on
 

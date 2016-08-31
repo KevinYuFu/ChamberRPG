@@ -21,7 +21,6 @@ public class AimedAbility extends UnitAbility {
 		
 		if (length > range) {
 			double angle = Math.atan2(dx, dy);
-			System.out.println(angle);
 			targetLoc.set((int)Math.round(this.unit.getXCoord() + (Math.sin(angle)*range)), 
 						(int)Math.round(this.unit.getYCoord() + (Math.cos(angle)*range)));
 		} else {

@@ -3,6 +3,10 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+// Player Controler is a controler for key input
+// Move units with wasd
+//
+// will hardcode ability hotkeys but should be adjustable
 public class PlayerControler implements KeyListener {
 	GameModel model;
 	boolean up;

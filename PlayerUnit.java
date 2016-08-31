@@ -2,14 +2,24 @@ import java.awt.*;
 
 public class PlayerUnit extends Unit {
 	Point cursorPoint;
-	UnitAbility activeAbility;
 
 	public PlayerUnit(GameMap map) {
 		// Static Test values
 		super(200, 200, 30, 5, map);
 		this.cursorPoint = new Point(200, 200);
-		testAbility = new AimedAbility(this, 5, 50);
-		activeAbility = testAbility; //new AimedAbility(this, 5, 50);
+		this.abilityKit = new AbilityKit(new AimedAbility(this, 5, 100),
+										new AimedAbility(this, 5, 100));
+	}
+
+	// Sets an ability as it's current selected ability
+	// selected ability will have indicator before it's activated
+	public void selectAbility(char c){
+		// do something
+	}
+
+	// use the ability that is selected
+	public void activateAblity(){
+		// activate ability
 	}
 
 	public void setCursorCoordinate(int x, int y){
@@ -22,6 +32,6 @@ public class PlayerUnit extends Unit {
 	
 	public void drawUnit(Graphics2D g2) {
 		super.drawUnit(g2);
-		this.activeAbility.drawAbility(g2);
+		this.abilityKit.drawAbilities(g2);
 	}
 }
