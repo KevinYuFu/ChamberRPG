@@ -1,25 +1,43 @@
-import javax.swing.*;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-// Player Controler is a controler for key input
+// Player Controller is a controler for key input
 // Move units with wasd
 //
 // will hardcode ability hotkeys but should be adjustable
-public class PlayerControler implements KeyListener {
-	GameModel model;
+public class PlayerController extends UnitController implements KeyListener {
+	// The Controled Unit
+	Unit unit;
+
+	// Mouse Variables
+	int mx;
+	int my;
+
+	// Movement Boolean Variables
 	boolean up;
 	boolean down;
 	boolean left;
 	boolean right;
 
-	public PlayerControler(GameModel m){
-		this.model = m;
+	public PlayerController(Unit u){
+		this.unit = u;
 		this.up = false;
 		this.down = false;
 		this.left = false;
 		this.right = false;
+	}
+
+	public void updateCursorCoord(int x, int y){
+		this.mx = x;
+		this.my = y;
+	}
+
+	public void leftMousePress(){
+		//do something
+	}
+
+	public void leftMouseRelease(){
+		//do something
 	}
 
 	public void keyPressed(KeyEvent e){
@@ -40,22 +58,23 @@ public class PlayerControler implements KeyListener {
 		updatePlayer();
 	}
 
+	// calculate direction the intended direction and tells the unit
 	private void updatePlayer(){
-		int c = 8;
+		char dir = 's';
 		if (up == down) { 
-			if (left == right) { c = 8; }
-			else if (left) { c = 6; }
-			else { c = 2; }
+			if (left == right) { dir = 's'; }
+			else if (left) { dir = 'a'; }
+			else { dir = 'd'; }
 		} else if (up) {
-			if (left == right) { c = 0; }
-			else if (left) { c = 7; }
-			else { c = 1; }
+			if (left == right) { dir = 'w'; }
+			else if (left) { dir = 'q'; }
+			else { dir = 'e'; }
 		} else {
-			if (left == right) { c = 4; }
-			else if (left) { c = 5; }
-			else { c = 3; }
+			if (left == right) { dir = 'x'; }
+			else if (left) { dir = 'z'; }
+			else { dir = 'c'; }
 		}
-		model.setPlayerDir(c);
+		unit.setDir(dir);
 	}
 	
 }

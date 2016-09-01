@@ -15,7 +15,8 @@ public class Unit {
 	// Unit Abilities
 	AbilityKit abilityKit;
 
-	GameMap map;	// the current map tha player is on
+	// the current map tha player is on
+	GameMap map;	
 
 	public Unit(double x, double y, double r, double s, GameMap m) {
 		this.x = x;
@@ -37,41 +38,45 @@ public class Unit {
 		return this.y;
 	}
 
-	public void setDirN(){ 
-		this.dx = 0; 
-		this.dy = -speed;
-	}
-	public void setDirS(){
-		this.dx = 0; 
-		this.dy = speed;
-	}
-	public void setDirE(){
-		this.dx = speed;
-		this.dy = 0; 
-	}
-	public void setDirW(){
-		this.dx = -speed;
-		this.dy = 0; 
-	}
-	public void setDirNE(){
-		this.dx = diagSp;
-		this.dy = -diagSp;
-	}
-	public void setDirNW(){
-		this.dx = -diagSp;
-		this.dy = -diagSp;
-	}
-	public void setDirSE(){
-		this.dx = diagSp;
-		this.dy = diagSp;
-	}
-	public void setDirSW(){
-		this.dx = -diagSp;
-		this.dy = diagSp;
-	}
-	public void setDirNull(){ 
-		this.dx = 0; 
-		this.dy = 0; 
+	public void setDir(char c){
+		switch(c){
+			case 'w': 	// up
+				this.dx = 0;
+				this.dy = -speed;
+				break;
+			case 'x': 	// down
+				this.dx = 0;
+				this.dy = speed;
+				break;
+			case 'a': 	// left
+				this.dx = -speed;
+				this.dy = 0;
+				break;
+			case 'd': 	// right
+				this.dx = speed;
+				this.dy = 0;
+				break;
+			case 'q': 	// up left
+				this.dx = -diagSp;
+				this.dy = -diagSp;
+				break;
+			case 'e': 	// up right
+				this.dx = diagSp;
+				this.dy = -diagSp;
+				break;
+			case 'z': 	// down left
+				this.dx = -diagSp;
+				this.dy = diagSp;
+				break;
+			case 'c': 	// down right
+				this.dx = diagSp;
+				this.dy = diagSp;
+				break;
+			case 's': 	// neutral
+				this.dx = 0;
+				this.dy = 0;
+				break;
+		}
 	}
 
 
@@ -80,7 +85,7 @@ public class Unit {
 		if (xResponse >= 0) {
 			x = xResponse;
 		} else if (xResponse == -2) {
-			System.out.println ("There seems to be an error");
+			System.out.println ("There seems to be an error with boundary");
 		} else {
 			x += dx;
 		}
@@ -89,7 +94,7 @@ public class Unit {
 		if (yResponse >= 0) {
 			y = yResponse;
 		} else if (yResponse == -2) {
-			System.out.println ("There seems to be an error");
+			System.out.println ("There seems to be an error with boundary");
 		} else {
 			y += dy;
 		}

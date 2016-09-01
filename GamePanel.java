@@ -12,6 +12,7 @@ public class GamePanel extends JPanel implements Observer {
 	int width;
 	int height;
 	GameModel model;
+	PlayerController controller;
 
 	public GamePanel(int width, int height, GameModel model){
 		super();
@@ -19,6 +20,8 @@ public class GamePanel extends JPanel implements Observer {
 		this.width = width;
 		this.height = height;
 		this.model = model;
+		this.controller = new PlayerController(model.getPlayer());
+		this.addKeyListener(this.controller);
 
 		this.setFocusable(true);
 
@@ -30,11 +33,13 @@ public class GamePanel extends JPanel implements Observer {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// Do Something
+				controller.leftMousePress();
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e){
 				// Do Something
+				controller.leftMouseRelease();
 			}
 		});
 
@@ -42,6 +47,7 @@ public class GamePanel extends JPanel implements Observer {
 			public void mouseMoved(MouseEvent e){
 				// Do Something
 				model.setCursorCoordinate(e.getX(), e.getY());
+				controller.updateCursorCoord(e.getX(), e.getY());
 			}
 		});
 	}

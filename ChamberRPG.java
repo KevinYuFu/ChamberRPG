@@ -14,8 +14,8 @@ public class ChamberRPG {
 		JFrame f = new JFrame("ChamberRPG");
 		GameModel model = new GameModel();
 		GamePanel panel = new GamePanel(width, height, model);
-		PlayerControler keyControler = new PlayerControler(model);
-		panel.addKeyListener(keyControler);
+		//PlayerControler keyControler = new PlayerControler(model);
+		//panel.addKeyListener(keyControler);
 		panel.setFocusTraversalKeysEnabled(false);
 		model.addObserver(panel);
 

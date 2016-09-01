@@ -13,40 +13,9 @@ public class GameModel extends Observable {
 	public GameMap getMap(){ return this.map; }
 	public PlayerUnit getPlayer() { return this.player; }
 
+	// this will be removed soon too
 	public void setCursorCoordinate(int x, int y){
 		this.player.setCursorCoordinate(x, y);
-	}
-
-	public void setPlayerDir(int direction) {	//(char keyCode) {
-		switch ( direction ) {
-			case 0: //
-				player.setDirN();
-				break;
-			case 1: //
-				player.setDirNE();
-				break;
-			case 2: //
-				player.setDirE();
-				break;
-			case 3: //
-				player.setDirSE();
-				break;
-			case 4: //
-				player.setDirS();
-				break;
-			case 5: //
-				player.setDirSW();
-				break;
-			case 6: //
-				player.setDirW();
-				break;
-			case 7: //
-				player.setDirNW();
-				break;
-			case 8: //
-				player.setDirNull();
-				break;
-		}
 	}
 
 	public void step(){

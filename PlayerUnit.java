@@ -12,7 +12,7 @@ public class PlayerUnit extends Unit {
 	}
 
 	// Sets an ability as it's current selected ability
-	// selected ability will have indicator before it's activated
+	// ability will indicat it's selection before it's activated
 	public void selectAbility(char c){
 		// do something
 	}
