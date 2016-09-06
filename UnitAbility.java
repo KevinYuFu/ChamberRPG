@@ -11,9 +11,15 @@ public abstract class UnitAbility {
 		this.cooldown = cd;
 	}
 
-	// What the ability does
-	public void activate() {} // set cooldown counter
+	// Abilities effect on selection (Sustained effect)
+	public void select() {}
 
-	// What ability looks like when active
+	// Abilities effect on activation (Final Effect)
+	public void activate() {
+		// set cooldown counter
+	}
+
+	// Ability Drawing methods
 	public abstract void drawAbility(Graphics2D g2);
+	public abstract void drawTargetIndicator(Graphics2D g2);
 }

@@ -9,13 +9,14 @@ public class AimedAbility extends UnitAbility {
 		super(unit, cd);
 		this.range = range;
 		targetLoc = new Point(0, 0);
-		updateTargetLoc(((PlayerUnit)unit).getCursorCoordinate());
+		updateTargetLocation();
 	}
 
-	private void updateTargetLoc(Point cursor){
-		// clean this up after
-		int dx = cursor.getX() - (int)Math.round(this.unit.getXCoord());
-		int dy = cursor.getY() - (int)Math.round(this.unit.getYCoord());
+	private void updateTargetLocation() {
+		Point target = unit.getTargetLocation();
+
+		int dx = target.getX() - (int)Math.round(this.unit.getXCoord());
+		int dy = target.getY() - (int)Math.round(this.unit.getYCoord());
 
 		int length = (int)Math.round(Math.sqrt(dx*dx + dy*dy));
 		
@@ -24,12 +25,19 @@ public class AimedAbility extends UnitAbility {
 			targetLoc.set((int)Math.round(this.unit.getXCoord() + (Math.sin(angle)*range)), 
 						(int)Math.round(this.unit.getYCoord() + (Math.cos(angle)*range)));
 		} else {
-			targetLoc.set(cursor.getX(), cursor.getY());
+			targetLoc.set(target.getX(), target.getY());
 		}
 	}
 
-	public void drawAbility(Graphics2D g2){
-		updateTargetLoc(((PlayerUnit)unit).getCursorCoordinate());
+	public void activate(){
+		super.activate();
+		updateTargetLocation();
+	}
+
+	public void drawAbility(Graphics2D g2){}
+
+	public void drawTargetIndicator(Graphics2D g2){
+		updateTargetLocation();
 
 		Color oldColor = g2.getColor();
 		g2.setColor(Color.GREEN);
@@ -38,6 +46,5 @@ public class AimedAbility extends UnitAbility {
 					targetLoc.getX(), targetLoc.getY());
 
 		g2.setColor(oldColor);
-		
 	}
 }

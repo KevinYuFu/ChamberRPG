@@ -6,8 +6,8 @@ import java.awt.event.KeyListener;
 //
 // will hardcode ability hotkeys but should be adjustable
 public class PlayerController extends UnitController implements KeyListener {
-	// The Controled Unit
-	Unit unit;
+	// The Controller Unit
+	PlayerUnit unit;
 
 	// Mouse Variables
 	int mx;
@@ -19,7 +19,7 @@ public class PlayerController extends UnitController implements KeyListener {
 	boolean left;
 	boolean right;
 
-	public PlayerController(Unit u){
+	public PlayerController(PlayerUnit u){
 		this.unit = u;
 		this.up = false;
 		this.down = false;
@@ -27,16 +27,30 @@ public class PlayerController extends UnitController implements KeyListener {
 		this.right = false;
 	}
 
-	public void updateCursorCoord(int x, int y){
+	public void updateCursorLocation(int x, int y){
 		this.mx = x;
 		this.my = y;
+
+		unit.setTargetLocation(x, y);
+		//System.out.println("x: " + x);
+		//System.out.println("y: " + y);
 	}
 
 	public void leftMousePress(){
 		//do something
+		selectAbility('a');
 	}
 
 	public void leftMouseRelease(){
+		//do something
+		activateAbility();
+	}
+
+	public void rightMousePress(){
+		//do something
+	}
+
+	public void rightMouseRelease(){
 		//do something
 	}
 
@@ -45,7 +59,7 @@ public class PlayerController extends UnitController implements KeyListener {
 		if (e.getKeyChar() == 'a') { this.left = true; }
 		if (e.getKeyChar() == 's') { this.down = true; }
 		if (e.getKeyChar() == 'd') { this.right = true; }
-		updatePlayer();
+		updateUnitDir();
 	}
 
 	public void keyTyped(KeyEvent e){}
@@ -55,11 +69,22 @@ public class PlayerController extends UnitController implements KeyListener {
 		if (e.getKeyChar() == 'a') { this.left = false; }
 		if (e.getKeyChar() == 's') { this.down = false; }
 		if (e.getKeyChar() == 'd') { this.right = false; }
-		updatePlayer();
+		updateUnitDir();
+	}
+
+	// Tell unit which ability to select
+	// 		'a' => Primary skill
+	// 		's' => Seconday skill
+	private void selectAbility(char c){
+		unit.selectAbility(c);
+	}
+
+	private void activateAbility(){
+		unit.activateAbility();
 	}
 
 	// calculate direction the intended direction and tells the unit
-	private void updatePlayer(){
+	private void updateUnitDir(){
 		char dir = 's';
 		if (up == down) { 
 			if (left == right) { dir = 's'; }

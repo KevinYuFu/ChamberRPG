@@ -25,29 +25,51 @@ public class GamePanel extends JPanel implements Observer {
 
 		this.setFocusable(true);
 
-		// // This is code from other project. Add in if I want
-		// this.setBorder(BorderFactory.createLineBorder(Color.black));
-		// this.setBackground(Color.WHITE);
-
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// Do Something
-				controller.leftMousePress();
+				if (SwingUtilities.isLeftMouseButton(e)){
+					// Left Mouse Click
+					controller.leftMousePress();
+				}
+				if (SwingUtilities.isRightMouseButton(e)){
+					// Right Mouse Click
+				}
+				if (SwingUtilities.isMiddleMouseButton(e)){
+					// Middle Mouse Click
+					// Probably won't need this so can remove
+				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e){
 				// Do Something
-				controller.leftMouseRelease();
+				if (SwingUtilities.isLeftMouseButton(e)){
+					// Left Mouse Click
+					controller.leftMouseRelease();
+				}
+				if (SwingUtilities.isRightMouseButton(e)){
+					// Right Mouse Click
+				}
+				if (SwingUtilities.isMiddleMouseButton(e)){
+					// Middle Mouse Click
+					// Probably won't need this so can remove
+				}
 			}
 		});
 
 		addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
 			public void mouseMoved(MouseEvent e){
-				// Do Something
-				model.setCursorCoordinate(e.getX(), e.getY());
-				controller.updateCursorCoord(e.getX(), e.getY());
+				// update controller
+				controller.updateCursorLocation(e.getX(), e.getY());
+				//System.out.println("x: " + e.getX());
+				//System.out.println("y: " + e.getY());
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e){
+				mouseMoved(e);
 			}
 		});
 	}

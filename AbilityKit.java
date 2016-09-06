@@ -23,24 +23,37 @@ public class AbilityKit {
 	}
 
 	// Sets an ability as current selected ability
-	public void selectAbiltiy(char c){
+	public void selectAbility(char c){
 		// set an ability as Selected
+		if (c == 'a') {
+			selectedAbility = primaryAbility;
+		} else if (c == 's') {
+			selectedAbility = secondaryAbility;
+		}
 	}
 
 	// deselects Ability
-	public void deselectAbiltiy(){
+	public void deselectAbility(){
 		selectedAbility = null;
 	}
 
 	// Activates selected ability
 	public void activateAbility(){
 		// activate selected ability
+		deselectAbility();
 	}
 
-	// Draws current selected ability
+	// Draw current selected ability
 	public void drawAbilities(Graphics2D g2) {
 		if (selectedAbility != null) {
 			this.selectedAbility.drawAbility(g2);
+		}
+	}
+
+	// Draw target indicator of selected ability
+	public void drawTargetIndicator(Graphics2D g2) {
+		if (selectedAbility != null) {
+			this.selectedAbility.drawTargetIndicator(g2);
 		}
 	}
 }

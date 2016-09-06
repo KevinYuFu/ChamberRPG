@@ -9,4 +9,5 @@ public class PowerUpAbility extends UnitAbility{
 	}
 
 	public void drawAbility(Graphics2D g2){}
+	public void drawTargetIndicator(Graphics2D g2){}
 }

@@ -12,11 +12,14 @@ public class Unit {
 	double dx;		// change in x on next step
 	double dy;		// change in y on next step
 
+	// Where Unit is currently targeting
+	Point targetLoc;
+
 	// Unit Abilities
 	AbilityKit abilityKit;
 
 	// the current map tha player is on
-	GameMap map;	
+	GameMap map;
 
 	public Unit(double x, double y, double r, double s, GameMap m) {
 		this.x = x;
@@ -26,6 +29,7 @@ public class Unit {
 		this.diagSp = speed *  Math.sqrt(0.5);
 		this.dx = 0;
 		this.dy = 0;
+		this.targetLoc = new Point(0, 0);
 
 		this.map = m;
 	}
@@ -36,6 +40,28 @@ public class Unit {
 
 	public double getYCoord() {
 		return this.y;
+	}
+
+	// set location to target
+	public void setTargetLocation(int x, int y){
+		this.targetLoc.set(x, y);
+	}
+
+	// get targeted location
+	public Point getTargetLocation() {
+		return this.targetLoc;
+	}
+
+	// Sets an ability as it's current selected ability
+	public void selectAbility(char c){
+		// do something
+		abilityKit.selectAbility(c);
+	}
+
+	// activate selected ablitiy
+	public void activateAbility(){
+		// do something
+		abilityKit.activateAbility();
 	}
 
 	public void setDir(char c){
@@ -116,6 +142,9 @@ public class Unit {
 		g2.drawOval(px, py, diameter, diameter);
 
 		g2.setStroke(oldStroke);
+
+		// draw Abilities
+		this.abilityKit.drawAbilities(g2);
 	}
 
 }

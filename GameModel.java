@@ -13,11 +13,6 @@ public class GameModel extends Observable {
 	public GameMap getMap(){ return this.map; }
 	public PlayerUnit getPlayer() { return this.player; }
 
-	// this will be removed soon too
-	public void setCursorCoordinate(int x, int y){
-		this.player.setCursorCoordinate(x, y);
-	}
-
 	public void step(){
 		player.move();
 	}
